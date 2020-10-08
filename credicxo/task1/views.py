@@ -21,7 +21,7 @@ def userlogin(request):
             if user is not None:
                 auth.login(request, user)
                 messages.info(request, 'You are logged In Successfully..!!')
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/home/')
             else:
                 messages.info(request, 'Invalid credential')
     else:
@@ -42,7 +42,7 @@ def usersignup(request):
                 f = User.objects.create_user(username=a, first_name=b, last_name=c, email=d, password=e)
                 f.save()
                 messages.success(request, 'You are Successfully Registered..!!')
-                return HttpResponseRedirect('/signup')
+                return HttpResponseRedirect('/')
             else:
                 messages.warning(request, 'Password not matched')
     else:
@@ -52,7 +52,7 @@ def usersignup(request):
 def userlogout(request):
     if request.user.is_authenticated:
         auth.logout(request)
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect('/')
 
     
 def addstudent(request):
@@ -60,7 +60,7 @@ def addstudent(request):
         ff = addform(request.POST)
         if ff.is_valid():
             ff.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/home/')
     else:
         ff = addform()
     return render(request,'app/add.html',{'fm':ff})
@@ -71,7 +71,7 @@ def updatestudent(request, id):
         ff = addform(data=request.POST, instance=doc)
         if ff.is_valid():
             ff.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/home/')
     else:
         doc = get_object_or_404(Student, id=id)
         ff = addform(instance=doc)
@@ -80,7 +80,7 @@ def updatestudent(request, id):
 def deletestudent(request, id):
     ff = get_object_or_404(Student, id=id)
     ff.delete()
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/home/')
 
 def searchstudent(request):
     hh = request.POST['name']
