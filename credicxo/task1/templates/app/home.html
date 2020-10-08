@@ -15,6 +15,9 @@
                 <th>STUDENT NAME</th>
                 <th>AGE</th>
                 <th>MARKS</th>
+                {% if request.user.is_superuser %}
+                <th>ACTION</th>
+                {% endif %}
               </tr>
             </thead>
             
@@ -26,8 +29,11 @@
                 <td>{{f.roll}}</td>
                 <td>{{f.name|capfirst}}</td>
                 <td>{{f.age}}</td>
-               
                 <td>{{f.marks}}</td>
+                {% if request.user.is_superuser %}
+                <th><a href="{% url 'changedata' f.id %}" class="btn btn-info btn-primary-sm btn-success">Update</a>
+                    <a href="{% url 'deletedata' f.id %}" class="btn btn-info btn-primary-sm btn-danger">Delete</a></th>
+                {% endif %}
             </tbody>
             {% endfor %}
             {% else %}

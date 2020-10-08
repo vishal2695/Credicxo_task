@@ -65,3 +65,19 @@ def addstudent(request):
         ff = addform()
     return render(request,'app/add.html',{'fm':ff})
 
+def updatestudent(request, id):
+    if request.method == 'POST':
+        doc = get_object_or_404(Student, id=id)
+        ff = addform(data=request.POST, instance=doc)
+        if ff.is_valid():
+            ff.save()
+            return HttpResponseRedirect('/')
+    else:
+        doc = get_object_or_404(Student, id=id)
+        ff = addform(instance=doc)
+    return render(request, 'app/update.html',{'fm':ff})
+
+def deletestudent(request, id):
+    ff = get_object_or_404(Student, id=id)
+    ff.delete()
+    return HttpResponseRedirect('/')
