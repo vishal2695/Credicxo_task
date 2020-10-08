@@ -6,6 +6,11 @@
     <h1 class="text-center">STUDENT INFORMATIONS</h1>
 
     <div><button class="btn btn-warning btn-outline-success"><a style="text-decoration: none;" class="text-white" href="{% url 'add' %}">Add Student Details</a></button></div>
+    <form action="{% url 'search' %}" method="post"   class="form-inline mt-3">
+        {% csrf_token %}
+        <input type="text" name='name' placeholder="Student" class="form-control my-sm-2">
+        <button type="submit" class="btn btn-success">Search</button>
+      </form>
     <div class="text-center">
         <table class="col-sm-12 table table-hover bg-white">
             <thead>

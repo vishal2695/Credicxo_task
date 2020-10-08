@@ -4,8 +4,6 @@ from django.contrib.auth.models import User, auth
 from .models import Student
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from rest_framework import viewsets
-from .serializers import StudentSerializer
 
 # Create your views here.
 
@@ -83,3 +81,8 @@ def deletestudent(request, id):
     ff = get_object_or_404(Student, id=id)
     ff.delete()
     return HttpResponseRedirect('/')
+
+def searchstudent(request):
+    hh = request.POST['name']
+    hb = Student.objects.filter(name__icontains=hh)
+    return render(request, 'app/home.html', {'fm':hb})
