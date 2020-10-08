@@ -52,5 +52,4 @@ def userlogout(request):
         auth.logout(request)
         return HttpResponseRedirect('/login')
 
-def 
 
