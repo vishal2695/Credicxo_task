@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Student
 
 
 class usersignupfrm(forms.Form):
@@ -39,3 +40,12 @@ class userloginfrm(forms.Form):
         else:
             raise forms.ValidationError('Invalid Username')
 
+class addform(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = '__all__'
+        widgets = {'roll':forms.TextInput(attrs={'class':'form-control'}),'name':forms.TextInput(attrs={'class':'form-control'}),
+                   'age':forms.TextInput(attrs={'class':'form-control'}),'marks':forms.TextInput(attrs={'class':'form-control'})}
+        labels = {'roll':'Roll Number','name':'Student Name','age':'Age','marks':'Marks Obtained'}
+        error_messages = {'roll':{'required':'Roll number is empty...'},'name':{'required':'you need to write Student name.'},
+                 'age':{'required':'please write student age'},'marks':{'required':'please write student marks obtained in acadmics'}}

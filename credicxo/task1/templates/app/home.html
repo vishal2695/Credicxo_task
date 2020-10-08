@@ -2,8 +2,48 @@
 {% load static %}
 {% block content %}
 
+<div>
+    <h1 class="text-center">STUDENT INFORMATIONS</h1>
 
-<h1>hemllo home</h1>
+    <div><button class="btn btn-warning btn-outline-success"><a style="text-decoration: none;" class="text-white" href="{% url 'add' %}">Add Post</a></button></div>
+    <div class="text-center">
+        <table class="col-sm-12 table table-hover bg-white">
+            <thead>
+              <tr style="background-color:teal;" class="text-center">
+                <th>ID</th>
+                <th>ROLL NUMBER</th>
+                <th>STUDENT NAME</th>
+                <th>AGE</th>
+                <th>MARKS</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+            {% if fm %}
+            {% for f in fm %}
+              <tr class="text-center">
+                <td>{{f.id}}</td>
+                <td>{{f.roll}}</td>
+                <td>{{f.name|capfirst}}</td>
+                <td>{{f.age}}</td>
+               
+                <td>{{f.marks}}</td>
+            </tbody>
+            {% endfor %}
+            {% else %}
+            <tr class="text-center">
+              <td></td>
+              <td></td>
+              <td><h2>No Data Available</h2></td>
+              <td></td>
+              <td></td>
+            </tr>
+            {% endif %}
+          </table>
+     </div>
+</div>
+
+
 
 
 {% endblock %}

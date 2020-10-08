@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404
-from .forms import userloginfrm, usersignupfrm
+from .forms import userloginfrm, usersignupfrm, addform
 from django.contrib.auth.models import User, auth
+from .models import Student
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 # Create your views here.
 
 def home(request):
-    return render(request,'app/home.html')
+    ff = Student.objects.all()
+    return render(request,'app/home.html',{'fm':ff})
 
 def userlogin(request):
     if request.method == 'POST':
@@ -52,4 +54,14 @@ def userlogout(request):
         auth.logout(request)
         return HttpResponseRedirect('/login')
 
+    
+def addstudent(request):
+    if request.method == 'POST':
+        ff = addform(request.POST)
+        if ff.is_valid():
+            ff.save()
+            return HttpResponseRedirect('/')
+    else:
+        ff = addform()
+    return render(request,'app/add.html',{'fm':ff})
 
