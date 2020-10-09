@@ -105,11 +105,14 @@ def contact(request):
             a = request.POST['name']
             b = request.POST['email']
             c = request.POST['message']
-            print(a)
-            send_mail(a,
-             c, 
+            d = b+c
+            print(b)
+            print(c)
+            print(b+c)
+            send_mail(a,                   #for heading
+             d,                            #for msg
              b, 
-             ['vkd2695@gmail.com'],
+             ['vkd2695@gmail.com'],        #to
             )
             return HttpResponseRedirect('/home/')
     else:
