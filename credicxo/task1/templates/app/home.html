@@ -4,8 +4,9 @@
 
 <div>
     <h1 class="text-center">STUDENT INFORMATIONS</h1>
-
+{% if request.user.is_superuser %}
     <div><button class="btn btn-warning btn-outline-success"><a style="text-decoration: none;" class="text-white" href="{% url 'add' %}">Add Student Details</a></button></div>
+{% endif %}
     <form action="{% url 'search' %}" method="post"   class="form-inline mt-3">
         {% csrf_token %}
         <input type="text" name='name' placeholder="Student" class="form-control my-sm-2">
