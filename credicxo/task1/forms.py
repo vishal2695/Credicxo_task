@@ -49,3 +49,8 @@ class addform(forms.ModelForm):
         labels = {'roll':'Roll Number','name':'Student Name','age':'Age','marks':'Marks Obtained'}
         error_messages = {'roll':{'required':'Roll number is empty...'},'name':{'required':'you need to write Student name.'},
                  'age':{'required':'please write student age'},'marks':{'required':'please write student marks obtained in acadmics'}}
+
+class contactform(forms.Form):
+    name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter Your Name'}), error_messages={'required':'Enter Name'})
+    email = forms.EmailField(max_length=50, widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Enter Your Email'}), error_messages={'required':'Enter Email'})
+    message = forms.CharField(max_length=200, widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Enter Your Message', 'rows':4}), error_messages={'required':'Enter Message'})

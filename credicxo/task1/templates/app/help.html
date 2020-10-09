@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid my-5">
+    {% if name %}
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h1>Thank You {{name}}!</h1>
+            <h5>We recieved your email and will respond you shortly...  </h5>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-sm-12 bg-info text-center"><h1>Contact Us</h1></div>
+    </div>
+   
+    
+    <div class="row my-3">
+        <div class="col-sm-6 bg-light">
+            <br>
+            <form  method="POST" novalidate>
+                {% csrf_token %}
+            
+                {% for f in fm %}
+                <div>{{f.label}}{{f}}<small class="text-warning">{{f.errors|striptags}}</small></div>
+                {% endfor %}
+                <br>
+               
+                <input type="submit" value="Send" class="btn btn-info offset-4">
+                <button  class="btn btn-danger "><a style="text-decoration: none;color: white;" href="{% url 'dashboard' %}">Cancel</a></button>
+                
+                </form>
+            <br>
+        </div>
+    </div>
+    
+    
+   
+
+    {% endif %}
+</div>
+{% endblock content %}
+
